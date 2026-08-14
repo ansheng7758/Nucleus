@@ -231,14 +231,11 @@ fun main(args: Array<String>) =
                             selectedTab = selectedTab,
                             onSelect = { selectedTab = it },
                             onReorder = { _, _ -> },
-                            modifier = Modifier.align(Alignment.CenterHorizontally),
+                            modifier =
+                                Modifier
+                                    .align(Alignment.Start)
+                                    .padding(start = 8.dp, end = 24.dp),
                         )
-                    }
-                    // Verify OS-driven minimize/restore (taskbar, Dock, Cmd-M,
-                    // title-bar button). On macOS this now flows from the native
-                    // windowDidMiniaturize/Deminiaturize hook into state.isMinimized.
-                    LaunchedEffect(state.isMinimized) {
-                        println("[Minimize] state.isMinimized = ${state.isMinimized}")
                     }
                     // Energy efficiency: full when minimized, light when unfocused
                     val isWindowFocused by nucleusWindow.focusFlow.collectAsState()
